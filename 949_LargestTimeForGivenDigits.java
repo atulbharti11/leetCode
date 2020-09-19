@@ -8,7 +8,6 @@ Given an array arr of 4 digits, find the latest 24-hour time that can be made us
 
 Return the latest 24-hour time in "HH:MM" format.  If no valid time can be made, return an empty string.
 
- 
 
 Example 1:
 
