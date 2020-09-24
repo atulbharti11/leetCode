@@ -31,7 +31,6 @@ Example 4:
 Input: A = [0,0,1,0]
 Output: "10:00"
 
- 
 
 Constraints:
 
