@@ -4,9 +4,8 @@ Given your favorite String array. Find the occurances of each in pie value of gi
 
 class PiExample {
     String piVal = "31415926535897932384626433832795028841971";
-    char[] piValCharArr = piVal.toCharArray();
-    String [] fav = {"314", "89793238462", "0288419", "3383", "5555555555"};
-    
+    String[] fav = {"314", "89793238462", "0288419", "3238", "5555555555", "14", "28841"};
+
     int length = piVal.length();
     int spaces = 0;
     Map<String, Boolean> favMap;
@@ -14,7 +13,7 @@ class PiExample {
 
     void createMap(Map<String, Boolean> favMap) {
         minSizeFav = Integer.MAX_VALUE;
-        for(String val: fav) {
+        for (String val : fav) {
             minSizeFav = Math.min(minSizeFav, val.length());
             favMap.put(val, false);
         }
@@ -22,26 +21,28 @@ class PiExample {
 
     public static void main(String args[]) {
         PiExample piExample = new PiExample();
-        piExample.favMap = new TreeMap<>();
+        piExample.favMap = new LinkedHashMap<>();
         piExample.createMap(piExample.favMap);
-        System.out.println(piExample.checkVal (0));
+        int[] visited = new int[piExample.length];
+        for (int c = 0; c < visited.length; ++c) visited[c] = -1;
+        System.out.println(piExample.checkVal(0, visited));
     }
 
-    int checkVal (int pos) {
+    int checkVal(int pos, int[] visited) {
         if (pos == length) return 0;
 
         int ans = Integer.MAX_VALUE;
 
         String pref = "";
-        for (int i = pos; i < length; ++i) { //char c: piValCharArr) {
+        for (int i = pos; i < length; ++i) {
             int j = length;
-            while ((j > i) & (j-i+1 > minSizeFav)) {
-                pref = piVal.substring(i,j);
+            while ((j > i) & (j - i >= minSizeFav)) {
+                pref = piVal.substring(i, j);
                 j--;
-                if (exists(pref)) {
+                if (exists(pref, i, j + 1, visited)) {
                     spaces++;
                     int other = Integer.MAX_VALUE;
-                    other = checkVal(i + 1);
+                    other = checkVal(j + 1, visited);
                     {
                         ans = Math.min(spaces, other);
                     }
@@ -51,15 +52,23 @@ class PiExample {
         return ans;
     }
 
-    boolean exists(String pref) {
-        Boolean value_Val = favMap.get(pref);
-        Boolean value_Key = favMap.containsKey(pref);
-        if(value_Val == null) return false;
+    boolean exists(String pref, int start, int end, int[] visited) {
+        Boolean value_Val = favMap.containsKey(pref);
+        Boolean value_Key = (value_Val != null) ? favMap.get(pref) : true;
+        if (value_Val == false) return false;
+        if (value_Key == true) return false;
 
-        if(value_Key &  (value_Val == false)) {
-            favMap.replace(pref, true);
-            return true;
+        int tempStrat = start;
+        while (end >= tempStrat) {
+            if (visited[tempStrat] == 0)
+                return false;
+            tempStrat++;
         }
-        return false;
+        favMap.replace(pref, true);
+        while (end >= start) {
+            visited[start] = 0;
+            start++;
+        }
+        return true;
     }
 }
