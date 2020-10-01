@@ -6,6 +6,7 @@ Remove repeated characters that appear more than twice in a string
 
 */
 
+
 class Solution {
     public String solution(String S) {
         // write your code in Java SE 8
