@@ -3,7 +3,6 @@ Remove repeated characters that appear more than twice in a string
 
 11122233 -> 112233
 1234445566666 -> 123445566
-
 */
 
 class Solution {
