@@ -4,7 +4,6 @@ return the length of the last word in the string.
 If the last word doesn't exist, return 0.
 /*
 
-
 class Solutionnn {
 
     public static int countLength(String s){
