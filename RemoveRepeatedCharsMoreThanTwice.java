@@ -1,4 +1,3 @@
-
 /*
 Remove repeated characters that appear more than twice in a string
 
