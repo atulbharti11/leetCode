@@ -1,5 +1,4 @@
 /*
-
 Given a string a consists of upper/lowercase alphabet characters and empty space characters '',
 return the length of the last word in the string.
 If the last word doesn't exist, return 0.
