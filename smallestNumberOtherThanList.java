@@ -1,4 +1,5 @@
 /*
+
 Write a function:
 
     class Solution { public int solution(int[] A); }
